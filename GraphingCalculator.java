@@ -33,6 +33,8 @@ public class GraphingCalculator implements ActionListener {
 	//						       0    1    2    3    4    5    6
 	List<String> operatorList = Arrays.asList(operators);
 	
+	boolean graphMode = false;
+	
 	public GraphingCalculator() {
 		calcWindow.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -68,7 +70,6 @@ public class GraphingCalculator implements ActionListener {
 		c.gridy = 5;
 		c.gridx = 0;
 		calcWindow.add(variableField, c);
-		
 		
 		c.gridy = 5;
 		c.gridx = 1;
@@ -128,6 +129,9 @@ public class GraphingCalculator implements ActionListener {
 			parenthesesCheck(expression);
 			expressionOperatorsValid(expression);
 			
+			//validate increments field
+			validateIncrements();
+			
 			
 			/* Solving Expression */
 			
@@ -151,7 +155,7 @@ public class GraphingCalculator implements ActionListener {
 			errorField.setText(message);
 		}
 		
-		
+		graphMode = false;
 	}
 	
 	/*
@@ -673,5 +677,14 @@ public class GraphingCalculator implements ActionListener {
 		return expression;
 	}
 	
+	public void validateIncrements(){
+		if(incrementsField.getText().isEmpty()) return;
+		else{
+			if(Double.parseDouble(incrementsField.getText()) < 0){
+				throw new IllegalArgumentException("The 'Increments of x' field must be positive");
+			}
+			graphMode = true;
+		}
+	}
 
 }
