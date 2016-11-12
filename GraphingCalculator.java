@@ -20,10 +20,12 @@ public class GraphingCalculator implements ActionListener {
 	private JTextField inputField = new JTextField();
 	private JTextField errorField = new JTextField();
 	private JTextField variableField = new JTextField();
+	private JTextField incrementsField = new JTextField();
 	private JTextArea logAreaField = new JTextArea();
 	private JLabel inputLabel = new JLabel("Input Expression:");
 	private JLabel errorLabel = new JLabel("Error:");
 	private JLabel variableLabel = new JLabel("For x:");
+	private JLabel incrementsLabel = new JLabel("Increments of x:");
 	private JLabel logAreaLabel = new JLabel("Log:");
 	private JScrollPane logScrollPane = new JScrollPane(logAreaField);
 	private String[] operators = {"(", "^", "r", "*", "/", "+", "-"};
@@ -39,7 +41,7 @@ public class GraphingCalculator implements ActionListener {
 		c.weightx = 1.0;
 		c.weighty = 0;
 		c.gridy = 0;
-		c.gridwidth = 1;
+		c.gridwidth = 2;
 		c.gridheight = 1;
 		calcWindow.add(logAreaLabel, c);
 		
@@ -56,12 +58,25 @@ public class GraphingCalculator implements ActionListener {
 		calcWindow.add(inputField, c);
 		
 		c.gridy = 4;
+		c.gridwidth = 1;
 		calcWindow.add(variableLabel, c);
 		
+		c.gridy = 4;
+		c.gridx = 1;
+		calcWindow.add(incrementsLabel, c);
+
 		c.gridy = 5;
+		c.gridx = 0;
 		calcWindow.add(variableField, c);
 		
+		
+		c.gridy = 5;
+		c.gridx = 1;
+		calcWindow.add(incrementsField, c);
+		
 		c.gridy = 6;
+		c.gridx = 0;
+		c.gridwidth = 2;
 		calcWindow.add(errorLabel, c);
 		
 		c.gridy = 7;
