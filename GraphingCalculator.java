@@ -149,13 +149,32 @@ public class GraphingCalculator implements ActionListener {
 			}
 			errorField.setText("");
 			inputField.setText("");
+
+			if(graphMode){
+				int graphSize = 11;
+				Double[] xVal = new Double[graphSize];
+				Double[] yVal = new Double[graphSize];
+				
+				xVal[0] = Double.parseDouble(variableField.getText());
+				yVal[0] = Double.parseDouble(expression);
+				for(int i=1; i<graphSize; i++){
+
+					expression = variableSubstitution(originalExpression, variable+i);
+					System.out.println("Your expression: " + expression);
+					expression = complexSolve(expression);
+					expression = expression.replaceAll("n", "-");
+
+					xVal[i] = xVal[i-1] + Double.parseDouble(incrementsField.getText());
+					yVal[i] = Double.parseDouble(expression);
+					System.out.println("answer: " + expression);
+				}
+			}
+			graphMode = false;
 			
 		} catch (Exception e) {
 			String message = e.getMessage();
 			errorField.setText(message);
 		}
-		
-		graphMode = false;
 	}
 	
 	/*
