@@ -141,7 +141,7 @@ public class GraphingCalculator implements ActionListener {
 			expression = complexSolve(expression);
 			expression = expression.replaceAll("n", "-");
 			
-			if (!(variable.equals("")) && !graphMode){
+			if (!(variable.equals(""))){
 				logAreaField.append(newLine + originalExpression + " = " + expression + " for x = " + variable);
 			}
 			else{
@@ -157,8 +157,6 @@ public class GraphingCalculator implements ActionListener {
 				
 				xVal[0] = Double.parseDouble(variableField.getText());
 				yVal[0] = Double.parseDouble(expression);
-				logAreaField.append(newLine + originalExpression + " = " + yVal[0] + " for x = " + xVal[0]);
-				
 				for(int i=1; i<graphSize; i++){
 					Double var = Double.parseDouble(variable);
 					String newVar = Double.toString(var+i);
@@ -171,8 +169,6 @@ public class GraphingCalculator implements ActionListener {
 					xVal[i] = xVal[i-1] + Double.parseDouble(incrementsField.getText());
 					yVal[i] = Double.parseDouble(expression);
 					System.out.println("answer: " + expression);
-					
-					logAreaField.append(newLine + originalExpression + " = " + yVal[i] + " for x = " + xVal[i]);
 				}
 			}
 			graphMode = false;
