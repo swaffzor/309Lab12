@@ -81,16 +81,16 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int theWidth = this.getSize().width;
 	    int theHeight = this.getSize().height;
 	    g.drawLine(50, theHeight-50, theWidth-50, theHeight-50);	//horizontal axis
-//    	g.drawString("|", 50, theHeight-45);
+	    g.drawLine(50, theHeight-50, 50, 50);	//vertical axis
     	int xBump = (theWidth - 100)/12;
     	int yBump = (theHeight- 100)/12;
 	    for(int i=0; i<xValString.length+1; i++){
 	    	g.drawString("|", 50+i*xBump, theHeight-45);
-	    	g.drawString("-", 50+i*xBump, theHeight-45);
+	    	g.drawString("-", 45, theHeight-45-(i*yBump));
 	    }
 	    
-	    int xValueToPixelsConversionFactor = 0;
-	    int yValueToPixelsConversionFactor = 0;
+	    int xValueToPixelsConversionFactor = xBump;
+	    int yValueToPixelsConversionFactor = yBump;
 	    
 	    
 	    // Draw Points on Graph
