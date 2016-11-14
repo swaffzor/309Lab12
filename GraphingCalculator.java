@@ -143,14 +143,8 @@ public class GraphingCalculator implements ActionListener {
 			
 			if (!(variable.equals("")) && !graphMode){
 				logAreaField.append(newLine + originalExpression + " = " + expression + " for x = " + variable);
-			}
-			else{
-				logAreaField.append(newLine + originalExpression + " = " + expression);
-			}
-			errorField.setText("");
-			inputField.setText("");
-
-			if(graphMode){
+			
+			} else if(graphMode){
 				int graphSize = 11;
 				Double[] xVal = new Double[graphSize];
 				Double[] yVal = new Double[graphSize];
@@ -174,7 +168,13 @@ public class GraphingCalculator implements ActionListener {
 					
 					logAreaField.append(newLine + originalExpression + " = " + yVal[i] + " for x = " + xVal[i]);
 				}
+			
+			} else{
+				logAreaField.append(newLine + originalExpression + " = " + expression);
 			}
+			
+			errorField.setText("");
+			inputField.setText("");
 			graphMode = false;
 			
 		} catch (Exception e) {
