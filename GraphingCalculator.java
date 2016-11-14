@@ -168,6 +168,7 @@ public class GraphingCalculator implements ActionListener {
 					
 					logAreaField.append(newLine + originalExpression + " = " + yVal[i] + " for x = " + xVal[i]);
 				}
+				GraphPanel gp = new GraphPanel(xVal, yVal, originalExpression);
 			
 			} else{
 				logAreaField.append(newLine + originalExpression + " = " + expression);
