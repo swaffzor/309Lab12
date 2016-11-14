@@ -1,3 +1,4 @@
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,18 +12,28 @@ public class GraphPanel extends JPanel implements MouseListener{
 	Double[] xVal = new Double[graphSize];
 	Double[] yVal = new Double[graphSize];
 	String expression;
+	GraphingCalculator gc;
 	
 	JPanel graphPanel = new JPanel();
 	JFrame graphWindow = new JFrame();
+	Graphics g;
 	
-	public GraphPanel(Double[] xval, Double[] yval, String expr) {
+	public GraphPanel(GraphingCalculator gc, Double[] xval, Double[] yval, String expr) throws IllegalArgumentException {
 		this.xVal = xval;
 		this.yVal = yval;
 		this.expression = expr;
 		
 		//build the GUI
 		graphWindow.setVisible(true);
-		graphWindow.getContentPane().add(graphPanel, "Center");
+		graphWindow.setTitle(expression);
+		graphWindow.getContentPane().add((Component)this, "Center");
+		graphWindow.setSize(400, 450);
+		graphWindow.setLocation(450, 0);
+		graphWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		g = graphPanel.getGraphics();
+		this.addMouseListener(this);
+//		paint(g);
 	}
 
 	@Override
@@ -32,22 +43,22 @@ public class GraphPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+			
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
+			
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+			
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+			
 	}
 	
 	@Override

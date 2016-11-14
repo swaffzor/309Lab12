@@ -25,7 +25,7 @@ public class GraphingCalculator implements ActionListener {
 	private JLabel inputLabel = new JLabel("Input Expression:");
 	private JLabel errorLabel = new JLabel("Error:");
 	private JLabel variableLabel = new JLabel("For x:");
-	private JLabel incrementsLabel = new JLabel("Increments of x:");
+	private JLabel incrementsLabel = new JLabel("with X increments of:");
 	private JLabel logAreaLabel = new JLabel("Log:");
 	private JScrollPane logScrollPane = new JScrollPane(logAreaField);
 	private String[] operators = {"(", "^", "r", "*", "/", "+", "-"};
@@ -94,6 +94,7 @@ public class GraphingCalculator implements ActionListener {
 		
 		inputField.addActionListener(this);
 		variableField.addActionListener(this);
+		incrementsField.addActionListener(this);
 		
 	}
 
@@ -168,7 +169,7 @@ public class GraphingCalculator implements ActionListener {
 					
 					logAreaField.append(newLine + originalExpression + " = " + yVal[i] + " for x = " + xVal[i]);
 				}
-				GraphPanel gp = new GraphPanel(xVal, yVal, originalExpression);
+				GraphPanel gp = new GraphPanel(this, xVal, yVal, originalExpression);
 			
 			} else{
 				logAreaField.append(newLine + originalExpression + " = " + expression);
