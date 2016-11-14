@@ -45,7 +45,10 @@ public class GraphPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+
+		int windowWidth  = e.getX();  // get the panel's   
+	    int windowHeight = e.getY(); // *CURRENT* size!
+	    System.out.println("Current click   is at " + windowWidth + " x " + windowHeight);
 	}
 
 	@Override
@@ -78,8 +81,12 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int theWidth = this.getSize().width;
 	    int theHeight = this.getSize().height;
 	    g.drawLine(50, theHeight-50, theWidth-50, theHeight-50);	//horizontal axis
-	    for(int i=0; i<xValString.length; i++){
-	    	g.drawString("|", 50, theHeight-45);
+//    	g.drawString("|", 50, theHeight-45);
+    	int xBump = (theWidth - 100)/12;
+    	int yBump = (theHeight- 100)/12;
+	    for(int i=0; i<xValString.length+1; i++){
+	    	g.drawString("|", 50+i*xBump, theHeight-45);
+	    	g.drawString("-", 50+i*xBump, theHeight-45);
 	    }
 	    
 	    int xValueToPixelsConversionFactor = 0;
