@@ -13,7 +13,8 @@ public class GraphPanel extends JPanel implements MouseListener{
 	Double[] yVal = new Double[graphSize];
 	String expression;
 	GraphingCalculator gc;
-	
+	String[] xValString = new String [xVal.length];
+	String[] yValString = new String [yVal.length];	
 	JFrame graphWindow = new JFrame();
 	Graphics g;
 	
@@ -73,5 +74,16 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int windowHeight = graphWindow.getHeight(); // *CURRENT* size!
 	    System.out.println("Current graph size is " + windowWidth + " x " + windowHeight);
 	    // Now use the instance variables and current window size to draw the graph.
+	    
+	    int theWidth = this.getSize().width;
+	    int theHeight = this.getSize().height;
+	    g.drawLine(50, theHeight-50, theWidth-50, theHeight-50);	//horizontal axis
+	    for(int i=0; i<xValString.length; i++){
+	    	g.drawString("|", 50, theHeight-45);
+	    }
+	    
+	    int xValueToPixelsConversionFactor = 0;
+	    int yValueToPixelsConversionFactor = 0;
+	    
 	}
 }
