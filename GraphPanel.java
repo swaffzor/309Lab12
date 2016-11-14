@@ -85,5 +85,18 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int xValueToPixelsConversionFactor = 0;
 	    int yValueToPixelsConversionFactor = 0;
 	    
+	    
+	    // Draw Points on Graph
+	    for(int i = 0; i < 11 ; i++){
+	    	int xPixelCoordinate = (int) ((xVal[i] * xValueToPixelsConversionFactor) + 50);
+	    	int yPixelCoordinate = (int) (theHeight - (yVal[i] * yValueToPixelsConversionFactor) -50);
+	    	
+	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
+	    					   " yPointbyPixel = " + yPixelCoordinate);
+	    	
+	    	g.drawOval(xPixelCoordinate, yPixelCoordinate, 5, 5);	
+	    }
+	    
+	    
 	}
 }
