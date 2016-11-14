@@ -161,6 +161,7 @@ public class GraphingCalculator implements ActionListener {
 					Double var = Double.parseDouble(variable);
 					String newVar = Double.toString(var+i);
 					expression = variableSubstitution(originalExpression, newVar);
+					expression = addUnary(expression);
 					System.out.println("Your expression: " + expression);
 					expression = complexSolve(expression);
 					expression = expression.replaceAll("n", "-");
