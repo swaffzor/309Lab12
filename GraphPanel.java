@@ -131,6 +131,12 @@ public class GraphPanel extends JPanel implements MouseListener{
 		
 		System.out.println("sy");
 		yValString =  (String[]) yList.toArray(yValString);
+		for(int ii=0; ii<yValString.length; ii++){
+			if(yValString[ii] == null){
+				yValString[ii] = "";
+			}
+		}
+		
 		
 	}
 
@@ -199,16 +205,13 @@ public class GraphPanel extends JPanel implements MouseListener{
 //	    	g.drawString(xValString[i], 50+i*xBump, theHeight-30);
 //	    	g.drawString(yValString[i], 32, theHeight-45-(i*yBump));
 //	    }
-	    int xZero = 0;
-	    int yZero = 0;
 	    int xBump = (theWidth - 100)/(xValString.length-1);
     	int yBump = (theHeight- 100)/(yValString.length-1);
 	    for(int i=0; i<xValString.length; i++){
 	    	xPixelCoord[i] = 50+i*xBump;
 	    	g.drawString("|", 50+i*xBump, theHeight-45);
 	    	g.drawString(xValString[i], 50+i*xBump, theHeight-30);
-	    	if(xValString[i].contains("0")){
-	    		xZero = 50+i*xBump;
+	    	if(xValString[i].equals("0")){
 	    		g.setColor(Color.green);
 		    	g.drawLine(51+i*xBump, theHeight-50, 51+i*xBump, 50);
 		    	g.setColor(Color.black);
@@ -217,7 +220,7 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    for(int i=0; i<yValString.length; i++){
 	    	g.drawString("-", 47, theHeight-45-(i*yBump));
 	    	g.drawString(yValString[i], 32, theHeight-45-(i*yBump));
-	    	if(yValString[i].contains("0")){
+	    	if(yValString[i].equals("0")){
 	    		g.setColor(Color.green);
 		    	g.drawLine(50, theHeight-49-(i*yBump), theWidth-50, theHeight-49-(i*yBump));
 		    	g.setColor(Color.black);
