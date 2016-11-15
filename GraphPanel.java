@@ -66,7 +66,12 @@ public class GraphPanel extends JPanel implements MouseListener{
 		
 		// X values as string array
 		for(int i=0; i < xval.length;i++){
-			xValString[i] = Integer.toString(xval[i].intValue());
+			if(checkForDecimal(xval[i])){
+				xValString[i] = Double.toString(Math.round(xval[i] * 100.0) / 100.0);
+			}
+			else{
+				xValString[i] = Integer.toString(xval[i].intValue());
+			}
 		}
 		// 
 		for(int i=1; i <yval.length;i++){
@@ -100,7 +105,7 @@ public class GraphPanel extends JPanel implements MouseListener{
 				yLowestint = yLowestint/10*10;
 			}
 			else if (Math.abs(yLowestint) > 0){
-				yLowestint = 0;
+//				yLowestint = 0;
 			}
 		}
 		else{
@@ -239,9 +244,9 @@ public class GraphPanel extends JPanel implements MouseListener{
 	  //  int yMax = Integer.parseInt(yValString[yVal.length-1]);	
 	    int yValueRange = yMax-yMin;
 	    
-	    int xMin = Integer.parseInt(xValString[0]);;
-	    int xMax = Integer.parseInt(xValString[xVal.length-1]); 
-	    int xValueRange = xMax-xMin;
+	    Double xMin = Double.parseDouble(xValString[0]);
+	    Double xMax = Double.parseDouble(xValString[xVal.length-1]); 
+	    int xValueRange =  xMax.intValue()-xMin.intValue();
 	    
 	    for(int i = 0; i < xValString.length ; i++){
 	    	double yValuePercentage = (yVal[i]-yMin)/yValueRange;
@@ -283,5 +288,15 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    }
 	    
 	    
+	}
+	
+	private boolean checkForDecimal(Double theVal){
+		Double test = theVal % 1;
+		if(test < 1 && test > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }

@@ -683,10 +683,10 @@ public class GraphingCalculator implements ActionListener {
 				throw new IllegalArgumentException("X must be a single digit number");
 			}
 		}
-		else if (!(variable.equals("1") || variable.equals("2") || variable.equals("3") || variable.equals("4") || variable.equals("5") || variable.equals("6") ||
-				variable.equals("7") || variable.equals("8") || variable.equals("9") || variable.equals("0") || variable.equals("") )){
-			throw new IllegalArgumentException("X must be a single digit number");
-		}
+//		else if (!(variable.equals("1") || variable.equals("2") || variable.equals("3") || variable.equals("4") || variable.equals("5") || variable.equals("6") ||
+//				variable.equals("7") || variable.equals("8") || variable.equals("9") || variable.equals("0") || variable.equals("") )){
+//			throw new IllegalArgumentException("X must be a single digit number");
+//		}
 		
 	}
 	
