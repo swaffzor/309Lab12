@@ -29,6 +29,9 @@ public class GraphPanel extends JPanel implements MouseListener{
 	JPanel xyPanel = new JPanel();
 	Graphics g;
 	
+	int yMin;
+	int yMax;
+	
 	public GraphPanel(GraphingCalculator gc, Double[] xval, Double[] yval, String expr) throws IllegalArgumentException {
 		this.gc = gc;
 		this.xVal = xval;
@@ -114,6 +117,9 @@ public class GraphPanel extends JPanel implements MouseListener{
 		}
 		
 		ystart = yLowestint;
+		this.yMin = yLowestint;
+		this.yMax = (int) yHighest+yinc; 
+		
 		int i = 0;
 		do{
 			yList.add(Integer.toString(ystart));
@@ -196,22 +202,22 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    
 	    int prevY = 0;
 	    int prevX = 0;
+	    
 	    // Draw Points on Graph
-	    int yMin = 0;
-	    int yMax = 100; // update this later with real max and min values on scale
+	  //  int yMin = Integer.parseInt(yValString[0]);
+	  //  int yMax = Integer.parseInt(yValString[yVal.length-1]);	
 	    int yValueRange = yMax-yMin;
 	    
-	    int xMin = 0;
-	    int xMax = 10; // update this later with real max and min values on scale
+	    int xMin = Integer.parseInt(xValString[0]);;
+	    int xMax = Integer.parseInt(xValString[xVal.length-1]); 
 	    int xValueRange = xMax-xMin;
 	    
 	    for(int i = 0; i < 11 ; i++){
 	    	double yValuePercentage = (yVal[i]-yMin)/yValueRange;
 	    	double xValuePercentage = (xVal[i]-xMin)/xValueRange;
 	    	
-//	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*11)) + 47);
-	    	int xPixelCoordinate = xPixelCoord[i];
-	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*11)) - 53);
+	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*10)) + 47);
+	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*10)) - 53);
 	    	
 	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
 	    					   " yPointbyPixel = " + yPixelCoordinate);
