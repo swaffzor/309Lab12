@@ -19,8 +19,8 @@ public class GraphPanel extends JPanel implements MouseListener{
 	Double[] yVal = new Double[graphSize];
 	String expression;
 	GraphingCalculator gc;
-    int xValueToPixelsConversionFactor;
-    int yValueToPixelsConversionFactor;
+    double xValueToPixelsConversionFactor;
+    double yValueToPixelsConversionFactor;
 
 	String[] xValString = new String [xVal.length];
 	String[] yValString = new String [yVal.length];	
@@ -134,7 +134,6 @@ public class GraphPanel extends JPanel implements MouseListener{
 			i++;
 		}while(ystart <= yHighest+yinc);
 		
-		System.out.println("sy");
 		yValString =  (String[]) yList.toArray(yValString);
 		for(int ii=0; ii<yValString.length; ii++){
 			if(yValString[ii] == null){
@@ -157,8 +156,8 @@ public class GraphPanel extends JPanel implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent me) {
 		// xTextField and yTextField are in the mini displayXYpairWindow
-	    int xInPixels = me.getX();
-	    double xValue = xInPixels * xValueToPixelsConversionFactor;
+	    double xInPixels = me.getX() - 50;
+	    double xValue = (xInPixels / xValueToPixelsConversionFactor)*(xVal[1]-xVal[0]) + xVal[0];
 	    String xValueString = String.valueOf(xValue);
 	    xTextField.setText("X = " + xValueString);
 	  
