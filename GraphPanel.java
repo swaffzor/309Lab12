@@ -1,9 +1,11 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -229,6 +231,24 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    	}
 	    	prevX = xPixelCoordinate;
 	    	prevY = yPixelCoordinate;
+	    }
+	    
+	    
+	    // Draw green line if there is a x=0
+	    List<Double> xList = Arrays.asList(xVal);
+	    List<Double> yList = Arrays.asList(yVal);
+	    
+	    double zero = 0; 
+	    int xZeroIndex=-1;
+	    if(xList.contains(zero)){
+	    	xZeroIndex = xList.indexOf(zero);
+	    }
+	    
+	    if(xZeroIndex != -1){
+	    	double yZeroValue = yList.get(xZeroIndex);
+	    	int yPixelHeight = (int) (theHeight - (((yZeroValue-yMin)/yValueRange) * (yBump*10)) - 50);
+	    	g.setColor(Color.green);
+	    	g.drawLine(50, yPixelHeight, theWidth-50, yPixelHeight);
 	    }
 	    
 	    
