@@ -189,15 +189,29 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int theHeight = this.getSize().height;
 	    g.drawLine(50, theHeight-50, theWidth-50, theHeight-50);	//horizontal axis
 	    g.drawLine(50, theHeight-50, 50, 50);	//vertical axis
-    	int xBump = (theWidth - 100)/10;
-    	int yBump = (theHeight- 100)/10;
+    	
+//	    int xBump = (theWidth - 100)/10;
+//    	int yBump = (theHeight- 100)/10;
+//	    for(int i=0; i<xValString.length; i++){
+//	    	xPixelCoord[i] = 50+i*xBump;
+//	    	g.drawString("|", 50+i*xBump, theHeight-45);
+//	    	g.drawString("-", 47, theHeight-45-(i*yBump));
+//	    	g.drawString(xValString[i], 50+i*xBump, theHeight-30);
+//	    	g.drawString(yValString[i], 32, theHeight-45-(i*yBump));
+//	    }
+	    
+	    int xBump = (theWidth - 100)/xValString.length;
+    	int yBump = (theHeight- 100)/yValString.length;
 	    for(int i=0; i<xValString.length; i++){
 	    	xPixelCoord[i] = 50+i*xBump;
 	    	g.drawString("|", 50+i*xBump, theHeight-45);
-	    	g.drawString("-", 47, theHeight-45-(i*yBump));
 	    	g.drawString(xValString[i], 50+i*xBump, theHeight-30);
+	    }
+	    for(int i=0; i<yValString.length; i++){
+	    	g.drawString("-", 47, theHeight-45-(i*yBump));
 	    	g.drawString(yValString[i], 32, theHeight-45-(i*yBump));
 	    }
+	    
 	    
 	    xValueToPixelsConversionFactor = xBump;
 	    yValueToPixelsConversionFactor = yBump;
@@ -214,12 +228,12 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int xMax = Integer.parseInt(xValString[xVal.length-1]); 
 	    int xValueRange = xMax-xMin;
 	    
-	    for(int i = 0; i < 11 ; i++){
+	    for(int i = 0; i < xValString.length ; i++){
 	    	double yValuePercentage = (yVal[i]-yMin)/yValueRange;
 	    	double xValuePercentage = (xVal[i]-xMin)/xValueRange;
 	    	
-	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*10)) + 47);
-	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*10)) - 53);
+	    	int xPixelCoordinate = xPixelCoord[i]-2;
+	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*yValString.length)) - 45);
 	    	
 	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
 	    					   " yPointbyPixel = " + yPixelCoordinate);
