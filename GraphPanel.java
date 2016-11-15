@@ -15,7 +15,9 @@ public class GraphPanel extends JPanel implements MouseListener{
 	Double[] yVal = new Double[graphSize];
 	String expression;
 	GraphingCalculator gc;
-	String [] xValString = new String [xVal.length];
+
+	String[] xValString = new String [xVal.length];
+	String[] yValString = new String [yVal.length];	
 	JFrame graphWindow = new JFrame();
 	Graphics g;
 	
@@ -110,7 +112,10 @@ public class GraphPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+
+		int windowWidth  = e.getX();  // get the panel's   
+	    int windowHeight = e.getY(); // *CURRENT* size!
+	    System.out.println("Current click   is at " + windowWidth + " x " + windowHeight);
 	}
 
 	@Override
@@ -139,5 +144,51 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int windowHeight = graphWindow.getHeight(); // *CURRENT* size!
 	    System.out.println("Current graph size is " + windowWidth + " x " + windowHeight);
 	    // Now use the instance variables and current window size to draw the graph.
+	    
+	    int theWidth = this.getSize().width;
+	    int theHeight = this.getSize().height;
+	    g.drawLine(50, theHeight-50, theWidth-50, theHeight-50);	//horizontal axis
+	    g.drawLine(50, theHeight-50, 50, 50);	//vertical axis
+    	int xBump = (theWidth - 100)/12;
+    	int yBump = (theHeight- 100)/12;
+	    for(int i=0; i<xValString.length+1; i++){
+	    	g.drawString("|", 50+i*xBump, theHeight-45);
+	    	g.drawString("-", 47, theHeight-45-(i*yBump));
+	    }
+	    
+	    int xValueToPixelsConversionFactor = xBump;
+	    int yValueToPixelsConversionFactor = yBump;
+	    
+	    int prevY = 0;
+	    int prevX = 0;
+	    // Draw Points on Graph
+	    int yMin = 0;
+	    int yMax = 10; // update this later
+	    int yValueRange = yMax-yMin;
+	    
+	    int xMin = 0;
+	    int xMax = 10; // update this later
+	    int xValueRange = xMax-xMin;
+	    
+	    for(int i = 0; i < 11 ; i++){
+	    	double yValuePercentage = (yVal[i]-yMin)/yValueRange;
+	    	double xValuePercentage = (xVal[i]-xMin)/xValueRange;
+	    	
+	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*11)) + 50);
+	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*11)) -50);
+	    	
+	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
+	    					   " yPointbyPixel = " + yPixelCoordinate);
+	    	
+	    	g.drawOval(xPixelCoordinate, yPixelCoordinate, 6, 6);	
+	    	
+	    	if(i > 0){
+	    		g.drawLine(prevX+3, prevY+3, xPixelCoordinate+3, yPixelCoordinate+3);
+	    	}
+	    	prevX = xPixelCoordinate;
+	    	prevY = yPixelCoordinate;
+	    }
+	    
+	    
 	}
 }
