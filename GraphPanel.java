@@ -23,7 +23,7 @@ public class GraphPanel extends JPanel implements MouseListener{
     double yValueToPixelsConversionFactor;
 
 	String[] xValString = new String [xVal.length];
-	String[] yValString = new String [yVal.length];	
+	String[] yValString = new String [yVal.length-1];	
 	JFrame graphWindow = new JFrame();
 	JFrame xyWindow = new JFrame();
 	JTextField xTextField = new JTextField();
@@ -252,7 +252,7 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    	double xValuePercentage = (xVal[i]-xMin)/xValueRange;
 	    	
 	    	int xPixelCoordinate = xPixelCoord[i]-2;
-	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*yValString.length)) - 45);
+	    	int yPixelCoordinate = (int) (theHeight - yValuePercentage*(theHeight - 100) - 52);
 	    	
 	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
 	    					   " yPointbyPixel = " + yPixelCoordinate);
