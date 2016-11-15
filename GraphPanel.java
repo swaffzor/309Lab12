@@ -1,5 +1,6 @@
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class GraphPanel extends JPanel implements MouseListener{
 	
@@ -15,13 +17,20 @@ public class GraphPanel extends JPanel implements MouseListener{
 	Double[] yVal = new Double[graphSize];
 	String expression;
 	GraphingCalculator gc;
+    int xValueToPixelsConversionFactor;
+    int yValueToPixelsConversionFactor;
 
 	String[] xValString = new String [xVal.length];
 	String[] yValString = new String [yVal.length];	
 	JFrame graphWindow = new JFrame();
+	JFrame xyWindow = new JFrame();
+	JTextField xTextField = new JTextField();
+	JTextField yTextField = new JTextField();
+	JPanel xyPanel = new JPanel();
 	Graphics g;
 	
 	public GraphPanel(GraphingCalculator gc, Double[] xval, Double[] yval, String expr) throws IllegalArgumentException {
+		this.gc = gc;
 		this.xVal = xval;
 		this.yVal = yval;
 		this.expression = expr;
@@ -39,6 +48,13 @@ public class GraphPanel extends JPanel implements MouseListener{
 		graphWindow.setSize(400, 450);
 		graphWindow.setLocation(450, 0);
 		graphWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		
+		xyPanel.setLayout(new GridLayout(2,1));
+		xyPanel.add(xTextField);
+		xyPanel.add(yTextField);
+		xyWindow.getContentPane().add(xyPanel);
+		xyWindow.setSize(160, 80);
 		
 		g = graphWindow.getGraphics();
 		this.addMouseListener(this);
@@ -119,13 +135,27 @@ public class GraphPanel extends JPanel implements MouseListener{
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-			
+	public void mousePressed(MouseEvent me) {
+		// xTextField and yTextField are in the mini displayXYpairWindow
+	    int xInPixels = me.getX();
+	    double xValue = xInPixels * xValueToPixelsConversionFactor;
+	    String xValueString = String.valueOf(xValue);
+	    xTextField.setText("X = " + xValueString);
+	  
+	    String yValueString = this.gc.graphPoint(this.expression,xValueString); 
+	    yTextField.setText("Y = " + yValueString);
+
+	    // show mini x,y display window
+	    xyWindow.setLocation(this.graphWindow.getX() + me.getX(), this.graphWindow.getY() + me.getY());
+	    xyWindow.setVisible(true); 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-			
+		
+		// "erase" mini x,y display window	
+	    xyWindow.setVisible(false);
+		
 	}
 
 	@Override
@@ -156,8 +186,8 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    	g.drawString("-", 47, theHeight-45-(i*yBump));
 	    }
 	    
-	    int xValueToPixelsConversionFactor = xBump;
-	    int yValueToPixelsConversionFactor = yBump;
+	    xValueToPixelsConversionFactor = xBump;
+	    yValueToPixelsConversionFactor = yBump;
 	    
 	    int prevY = 0;
 	    int prevX = 0;

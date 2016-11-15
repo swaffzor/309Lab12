@@ -713,5 +713,14 @@ public class GraphingCalculator implements ActionListener {
 			graphMode = true;
 		}
 	}
+	
+	public String graphPoint(String expression, String xValue){
+		expression = variableSubstitution(expression, xValue);
+		expression = addUnary(expression);
+		expression = complexSolve(expression);
+		expression = expression.replaceAll("n", "-");
+		
+		return expression;
+	}
 
 }
