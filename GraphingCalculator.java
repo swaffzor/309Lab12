@@ -149,14 +149,14 @@ public class GraphingCalculator implements ActionListener {
 				int graphSize = 11;
 				Double[] xVal = new Double[graphSize];
 				Double[] yVal = new Double[graphSize];
+				Double var = Double.parseDouble(variable);
 				
 				xVal[0] = Double.parseDouble(variableField.getText());
 				yVal[0] = Double.parseDouble(expression);
 				logAreaField.append(newLine + originalExpression + " = " + yVal[0] + " for x = " + xVal[0]);
 				
 				for(int i=1; i<graphSize; i++){
-					Double var = Double.parseDouble(variable);
-					String newVar = Double.toString(var+i);
+					String newVar = Double.toString(var);
 					expression = variableSubstitution(originalExpression, newVar);
 					expression = addUnary(expression);
 					System.out.println("Your expression: " + expression);
@@ -165,6 +165,7 @@ public class GraphingCalculator implements ActionListener {
 
 					xVal[i] = xVal[i-1] + Double.parseDouble(incrementsField.getText());
 					yVal[i] = Double.parseDouble(expression);
+					var = var+Double.parseDouble(incrementsField.getText());
 					System.out.println("answer: " + expression);
 					
 					logAreaField.append(newLine + originalExpression + " = " + yVal[i] + " for x = " + xVal[i]);
