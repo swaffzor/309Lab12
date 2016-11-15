@@ -200,8 +200,8 @@ public class GraphPanel extends JPanel implements MouseListener{
 //	    	g.drawString(yValString[i], 32, theHeight-45-(i*yBump));
 //	    }
 	    
-	    int xBump = (theWidth - 100)/xValString.length;
-    	int yBump = (theHeight- 100)/yValString.length;
+	    int xBump = (theWidth - 100)/(xValString.length-1);
+    	int yBump = (theHeight- 100)/(yValString.length-1);
 	    for(int i=0; i<xValString.length; i++){
 	    	xPixelCoord[i] = 50+i*xBump;
 	    	g.drawString("|", 50+i*xBump, theHeight-45);
