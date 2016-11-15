@@ -173,6 +173,7 @@ public class GraphPanel extends JPanel implements MouseListener{
 	public void paint(Graphics g){ // overrides paint() in JPanel
 		int windowWidth  = graphWindow.getWidth();  // get the panel's   
 	    int windowHeight = graphWindow.getHeight(); // *CURRENT* size!
+	    int xPixelCoord[] = new int[11];
 	    System.out.println("Current graph size is " + windowWidth + " x " + windowHeight);
 	    // Now use the instance variables and current window size to draw the graph.
 	    
@@ -183,6 +184,7 @@ public class GraphPanel extends JPanel implements MouseListener{
     	int xBump = (theWidth - 100)/10;
     	int yBump = (theHeight- 100)/10;
 	    for(int i=0; i<xValString.length; i++){
+	    	xPixelCoord[i] = 50+i*xBump;
 	    	g.drawString("|", 50+i*xBump, theHeight-45);
 	    	g.drawString("-", 47, theHeight-45-(i*yBump));
 	    	g.drawString(xValString[i], 50+i*xBump, theHeight-30);
@@ -207,7 +209,8 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    	double yValuePercentage = (yVal[i]-yMin)/yValueRange;
 	    	double xValuePercentage = (xVal[i]-xMin)/xValueRange;
 	    	
-	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*11)) + 47);
+//	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*11)) + 47);
+	    	int xPixelCoordinate = xPixelCoord[i];
 	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*11)) - 53);
 	    	
 	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
