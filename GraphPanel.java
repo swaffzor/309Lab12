@@ -252,11 +252,13 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    	
 	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
 	    					   " yPointbyPixel = " + yPixelCoordinate);
-	    	
+
+    		g.setColor(Color.red);
 	    	g.drawOval(xPixelCoordinate, yPixelCoordinate, 6, 6);	
 	    	
 	    	if(i > 0){
 	    		g.drawLine(prevX+3, prevY+3, xPixelCoordinate+3, yPixelCoordinate+3);
+	    		g.setColor(Color.black);
 	    	}
 	    	prevX = xPixelCoordinate;
 	    	prevY = yPixelCoordinate;
