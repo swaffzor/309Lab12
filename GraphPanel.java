@@ -61,7 +61,7 @@ public class GraphPanel extends JPanel implements MouseListener{
 		
 		// X values as string array
 		for(int i=0; i < xval.length;i++){
-			xValString[i] = Double.toString(xval[i]);
+			xValString[i] = Integer.toString(xval[i].intValue());
 		}
 		// 
 		for(int i=1; i <yval.length;i++){
@@ -122,8 +122,8 @@ public class GraphPanel extends JPanel implements MouseListener{
 		}while(ystart <= yHighest+yinc);
 		
 		System.out.println("sy");
+		yValString =  (String[]) yList.toArray(yValString);
 		
-//		paint(g);
 	}
 
 	@Override
@@ -132,6 +132,7 @@ public class GraphPanel extends JPanel implements MouseListener{
 		int windowWidth  = e.getX();  // get the panel's   
 	    int windowHeight = e.getY(); // *CURRENT* size!
 	    System.out.println("Current click   is at " + windowWidth + " x " + windowHeight);
+	    
 	}
 
 	@Override
@@ -179,11 +180,13 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int theHeight = this.getSize().height;
 	    g.drawLine(50, theHeight-50, theWidth-50, theHeight-50);	//horizontal axis
 	    g.drawLine(50, theHeight-50, 50, 50);	//vertical axis
-    	int xBump = (theWidth - 100)/12;
-    	int yBump = (theHeight- 100)/12;
-	    for(int i=0; i<xValString.length+1; i++){
+    	int xBump = (theWidth - 100)/10;
+    	int yBump = (theHeight- 100)/10;
+	    for(int i=0; i<xValString.length; i++){
 	    	g.drawString("|", 50+i*xBump, theHeight-45);
 	    	g.drawString("-", 47, theHeight-45-(i*yBump));
+	    	g.drawString(xValString[i], 50+i*xBump, theHeight-30);
+	    	g.drawString(yValString[i], 32, theHeight-45-(i*yBump));
 	    }
 	    
 	    xValueToPixelsConversionFactor = xBump;
