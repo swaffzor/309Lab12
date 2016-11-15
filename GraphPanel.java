@@ -193,19 +193,19 @@ public class GraphPanel extends JPanel implements MouseListener{
 	    int prevX = 0;
 	    // Draw Points on Graph
 	    int yMin = 0;
-	    int yMax = 10; // update this later
+	    int yMax = 100; // update this later with real max and min values on scale
 	    int yValueRange = yMax-yMin;
 	    
 	    int xMin = 0;
-	    int xMax = 10; // update this later
+	    int xMax = 10; // update this later with real max and min values on scale
 	    int xValueRange = xMax-xMin;
 	    
 	    for(int i = 0; i < 11 ; i++){
 	    	double yValuePercentage = (yVal[i]-yMin)/yValueRange;
 	    	double xValuePercentage = (xVal[i]-xMin)/xValueRange;
 	    	
-	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*11)) + 50);
-	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*11)) -50);
+	    	int xPixelCoordinate = (int) ((xValuePercentage * (xBump*11)) + 47);
+	    	int yPixelCoordinate = (int) (theHeight - (yValuePercentage * (yBump*11)) - 53);
 	    	
 	    	System.out.println("xPointbyPixel = " + xPixelCoordinate +
 	    					   " yPointbyPixel = " + yPixelCoordinate);
